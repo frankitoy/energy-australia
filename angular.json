@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "ea",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
@@ -61,7 +61,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "energy-australia:build"
+            "browserTarget": "energy-australia:build",
+            "proxyConfig": "proxy.conf.js"
           },
           "configurations": {
             "production": {
@@ -81,6 +82,7 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
+            "sourceMap": true,
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.scss"
@@ -109,7 +111,7 @@
     "energy-australia-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "prefix": "",
+      "prefix": "ea",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
@@ -135,5 +137,14 @@
       }
     }
   },
-  "defaultProject": "energy-australia"
+  "defaultProject": "energy-australia",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "ea",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "ea"
+    }
+  }
 }
