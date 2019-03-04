@@ -14,8 +14,8 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
 
-  appTitle = environment.appName;
-  pageTitle = '';
+  public appTitle = environment.appName;
+  public pageTitle;
 
   constructor(public title: Title, private router: Router, private activeRoute: ActivatedRoute, private routePartsService: RoutePartsService) {
   }
@@ -25,19 +25,23 @@ export class AppComponent implements OnInit {
   }
 
   private _changePageTitle(): void {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(_ => {
-      const routeParts = this.routePartsService.generateRouteParts(this.activeRoute.snapshot);
-      if (!routeParts.length) {
-        return this.title.setTitle(this.appTitle);
-      }
+    this.router.events.
+      pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(_ => {
+        const routeParts = this.routePartsService.generateRouteParts(this.activeRoute.snapshot);
+        if (!routeParts.length) {
+          return this.title.setTitle(this.appTitle);
+        }
 
-      this.pageTitle = routeParts
-        .reverse()
-        .map((part) => part.title )
-        .reduce((partA, partI) => `${partA} > ${partI}`);
+        this.pageTitle = routeParts
+          .reverse()
+          .map((part) => part.title )
+          .reduce((partA, partI) => `${partA} > ${partI}`);
 
-      this.pageTitle += ` | ${this.appTitle}`;
-      this.title.setTitle(this.pageTitle);
-    });
+        this.pageTitle += ` | ${this.appTitle}`;
+        this.title.setTitle(this.pageTitle);
+      });
   }
 }

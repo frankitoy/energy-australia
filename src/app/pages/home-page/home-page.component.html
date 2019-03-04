@@ -1,3 +1,15 @@
-<p>
-  home-page works!
-</p>
+<ng-template [ngIf]="loadingCarShow$ | async" [ngIfElse]="loaded">
+  Loading....
+</ng-template>
+<ng-template #loaded>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Car Shows</mat-card-title>
+      <mat-card-subtitle>Make and Model</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+

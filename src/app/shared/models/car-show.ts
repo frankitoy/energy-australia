@@ -1,6 +1,6 @@
 import { Car } from './car';
 
 export interface CarShow {
-  name: string;
+  name?: string;
   cars: Array<Car>;
 }

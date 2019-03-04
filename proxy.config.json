@@ -1,10 +1,7 @@
 {
-  "/api": {
-    "target": "http://eacodingtest.digital.energyaustralia.com.au/api/v1/cars",
+  "/api/*": {
+    "target": "http://eacodingtest.digital.energyaustralia.com.au",
     "secure": false,
-    "pathRewrite": {
-      "^/api": ""
-    },
     "logLevel": "debug"
   }
 }

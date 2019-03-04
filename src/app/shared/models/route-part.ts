@@ -5,5 +5,5 @@ export interface RoutePart {
   breadcrumb: string;
   params?: Params;
   url: string;
-  urlSegments: any[];
+  urlSegments: Array<any>;
 }
