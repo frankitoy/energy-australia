@@ -17,6 +17,10 @@
     "test": "ng test --watch=false --code-coverage"
   },
   "private": true,
+  "engines": {
+    "node": ">=8.11.4",
+    "npm": ">=5.6.0"
+  },
   "dependencies": {
     "@angular-redux/store": "^9.0.0",
     "@angular/animations": "~7.0.0",
