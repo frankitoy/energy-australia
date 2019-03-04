@@ -8,24 +8,56 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-phantomjs-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require('karma-spec-reporter'),
+      require('karma-junit-reporter'),
+      require('karma-istanbul-threshold'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    client: {
+    client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
-    coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true
+    mime: {
+      'text/x-typescript': ['ts','tsx']
     },
-    reporters: ['progress', 'kjhtml'],
+    coverageIstanbulReporter: {
+      reports: ['html', 'lcovonly', 'json'],
+      fixWebpackSourcePaths: true,
+      dir: 'reports/test/coverage' // overriding default /coverage folder to place all test reports in the same base folder
+    },
+    istanbulThresholdReporter: {
+      // TODO fix code coverage
+      src: 'reports/test/coverage/coverage-final.json',
+      reporters: ['text'],
+      thresholds: {
+        global: {
+          statements: 90,
+          branches: 90,
+          lines: 90,
+          functions: 90
+        },
+        each: {
+          statements: 90,
+          branches: 90,
+          lines: 90,
+          functions: 90
+        }
+      }
+    },
+    angularCli: {
+      environment: 'dev'
+    },
+    reporters: ['spec', 'junit', 'coverage-istanbul', 'istanbul-threshold'],
+    specReporter: {
+      suppressSkipped: true  // do not print information about skipped tests
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: false
   });
 };
