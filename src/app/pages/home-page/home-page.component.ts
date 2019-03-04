@@ -1,14 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import { select } from '@angular-redux/store';
 
 import { MatSnackBar } from '@angular/material';
 
-import { CarShowActions } from '../../actions/car-show.actions';
+import { Messages } from '../../shared/constants/messages.constant';
 import { CarShow } from '../../shared/models/car-show';
+
+import { CarShowActions } from '../../actions/car-show.actions';
 
 @Component({
   selector: 'ea-home-page',
@@ -26,7 +28,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   constructor(private snackBar: MatSnackBar, private carShowActions: CarShowActions) { }
 
   ngOnInit() {
-    this.notificationSubscribe();
+    this._carShowSubscribe();
+    this._notificationSubscribe();
     this.carShowActions.fetchCarShows();
   }
 
@@ -35,19 +38,37 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  notificationSubscribe(): void {
+  private _carShowSubscribe(): void {
+    this.carShows$
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        tap(carShows => {
+          if (typeof carShows !== 'undefined' && !carShows) {
+            this._openSnackBar(Messages.warning.emptyResult);
+          }
+        }),
+        filter(carShows => !!carShows)
+      )
+      .subscribe((carShows) => {
+        console.log(carShows);
+      });
+  }
+
+  private _notificationSubscribe(): void {
     this.notification$
       .pipe(
         takeUntil(this.ngUnsubscribe),
         filter(notification => !!notification)
       )
-      .subscribe((notification) =>
-        this.snackBar.open(notification, 'close', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'end',
-          panelClass: ['error']
-        })
-      );
+      .subscribe((notification) => this._openSnackBar(notification));
+  }
+
+  private _openSnackBar(message: string): void {
+    this.snackBar.open(message, 'close', {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+      panelClass: ['error']
+    });
   }
 }
