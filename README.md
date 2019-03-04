@@ -2,26 +2,44 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
-## Development server
+## Initial set-up 
+  1. run `nvm use`
+  2. run `npm install`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Setting up and running the app locally
 
-## Code scaffolding
+After running `npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+run `npm run start`
 
-## Build
+This will start start a dev server to serve the application and a proxy will forward them to the correct server. For details on the proxy see _proxy.config.json
+Navigate to `http://localhost:4100/` To view the application. The app will automatically reload if you change any of the source files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Note:** `ng serve` will start the server but will not run a full build with lint checks but `npm run start` does this for you. 
 
 ## Running unit tests
+Code coverage is set to 100% coverage. I have set up the project to have a git hook to do code coverage check prior pushing changes to branch 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. `npm test`
+
+   This will run all unit tests in a single run and produce a coverage report. This is the command used in bamboo jobs
+
+1. `ng test` 
+
+   This will run all unit tests and watch for changes. See [ng test wiki page](https://github.com/angular/angular-cli/wiki/test) for more info
+
+Coverage and Unit test reports sit in _reports/test/_
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`ng e2e` 
 
-## Further help
+This will execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `npm start`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+### Build
+
+`ng build` 
+
+To build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:4201/api',
+  api: 'http://localhost:4100/api/v1/cars',
   appName: 'Energy Australia'
 };
 

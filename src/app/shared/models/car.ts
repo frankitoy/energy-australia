@@ -1,4 +1,4 @@
 export interface Car {
-  make: string;
-  model: string;
+  make?: string;
+  model?: string;
 }
