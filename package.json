@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm-run-all lint:fix serve",
-    "build": "ng build --build-optimizer=true --prod --source-map --base-href=/",
+    "build": "ng build --build-optimizer=true --prod --source-map=false --base-href=/",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
     "e2e": "ng e2e -wu false",
     "e2e:ci": "/usr/bin/xvfb-run --server-args=\"-screen 0 1920x1920x24\" npm run e2e",
@@ -13,7 +13,7 @@
     "precommit": "npm-run-all lint:fix",
     "prepush": "npm-run-all lint test",
     "pre-release": "npm-run-all lint test build",
-    "serve": "ng serve --proxy-config proxy.config.json --base-href=/ --port 4100",
+    "serve": "ng serve --proxy-config proxy.config.json --source-map=true --base-href=/ --port 4100",
     "test": "ng test --watch=false --code-coverage"
   },
   "private": true,

@@ -53,6 +53,9 @@ module.exports = function (config) {
     specReporter: {
       suppressSkipped: true  // do not print information about skipped tests
     },
+    junitReporter: {
+      outputDir: '../reports/test/junit'
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
