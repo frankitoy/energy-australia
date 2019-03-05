@@ -1,4 +1,4 @@
-<ng-template [ngIf]="(loadingCarShow$ | async)" [ngIfElse]="loaded">
+<ng-template [ngIf]="(loadingCarShow$ | async) && carShowsToDisplay" [ngIfElse]="loaded">
   Loading....
 </ng-template>
 <ng-template #loaded>

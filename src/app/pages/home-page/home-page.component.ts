@@ -25,8 +25,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   @select() readonly loadingCarShow$: Observable<boolean>;
   @select() readonly notification$: Observable<string>;
 
-  public carShowsToDisplay: Array<any>;
-
+  private _carShowsToDisplay: Array<any>;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private snackBar: MatSnackBar, private carShowActions: CarShowActions) { }
@@ -40,6 +39,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  get carShowsToDisplay(): Array<any> {
+    return this._carShowsToDisplay;
   }
 
   private _carShowSubscribe(): void {
@@ -83,7 +86,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
           });
         });
 
-        this.carShowsToDisplay = cars;
+        this._carShowsToDisplay = cars;
       });
   }
 
