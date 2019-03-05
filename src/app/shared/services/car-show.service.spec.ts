@@ -78,8 +78,8 @@ describe('CarShowService', () => {
 
           // When
           const service$ = service.fetchCarShows();
-          service$.subscribe(_ => {
-          }, (responseError: HttpErrorResponse) => expect(responseError.error).toEqual('Failed download stream'));
+          service$.subscribe(_ => {},
+            (responseError: HttpErrorResponse) => expect(responseError.error).toEqual('Failed download stream'));
 
           // Then
           tick(1);

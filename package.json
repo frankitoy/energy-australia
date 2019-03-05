@@ -6,7 +6,7 @@
     "start": "npm-run-all lint:fix serve",
     "build": "ng build --build-optimizer=true --prod --source-map=false --base-href=/",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "e2e": "ng e2e -wu false",
+    "e2e": "ng e2e --port 4100",
     "e2e:ci": "/usr/bin/xvfb-run --server-args=\"-screen 0 1920x1920x24\" npm run e2e",
     "lint": "ng lint",
     "lint:fix": "ng lint energy-australia --fix",
@@ -17,6 +17,10 @@
     "test": "ng test --watch=false --code-coverage"
   },
   "private": true,
+  "engines": {
+    "node": ">=8.11.4",
+    "npm": ">=5.6.0"
+  },
   "dependencies": {
     "@angular-redux/store": "^9.0.0",
     "@angular/animations": "~7.0.0",

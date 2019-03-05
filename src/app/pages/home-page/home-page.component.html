@@ -1,4 +1,4 @@
-<ng-template [ngIf]="loadingCarShow$ | async" [ngIfElse]="loaded">
+<ng-template [ngIf]="(loadingCarShow$ | async)" [ngIfElse]="loaded">
   Loading....
 </ng-template>
 <ng-template #loaded>
@@ -7,7 +7,17 @@
       <mat-card-title>Car Shows</mat-card-title>
       <mat-card-subtitle>Make and Model</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content *ngIf="carShowsToDisplay">
+      <mat-card>
+        <mat-list *ngFor="let carShows of carShowsToDisplay | keyvalue">
+          <mat-card-title>{{ carShows.key }}</mat-card-title>
+          <mat-list-item *ngFor="let car of carShows.value | keyvalue">
+            <h4 mat-line>{{ car.value.model }}</h4>
+            <p mat-line> {{ car.value.show }}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-card>
     </mat-card-content>
   </mat-card>
 </ng-template>

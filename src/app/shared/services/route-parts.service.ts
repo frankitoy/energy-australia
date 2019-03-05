@@ -10,7 +10,7 @@ import { RoutePart } from '../models/route-part';
 export class RoutePartsService {
 
   generateRouteParts(snapshot: ActivatedRouteSnapshot): RoutePart[] {
-    let routeParts = <RoutePart[]>[];
+    let routeParts = <Array<RoutePart>>[];
     if (snapshot) {
 
       if (snapshot.firstChild) {

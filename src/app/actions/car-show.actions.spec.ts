@@ -1,12 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { MockNgRedux, NgReduxTestingModule } from '@angular-redux/store/lib/testing';
 
-import { EMPTY, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { CarShowService } from '../shared/services/car-show.service';
 
 import { CarShowActions } from './car-show.actions';
-import { CarShow } from '../shared/models/car-show';
 
 import { carShowFixtures } from '../../test/fixtures/car-show-fixtures';
 
@@ -79,24 +78,23 @@ describe('CarShowActions', () => {
 
     it('should call start and end dispatch actions when carShowService.fetchCarShows return a HTTP 400 bad response',
       inject([CarShowActions, CarShowService],
-        (actions: CarShowActions, carShowService: CarShowService) => {
-          // Given
-          spyOn(carShowService, 'fetchCarShows').and.returnValue(throwError(
-            {
-              status: 400,
-              error: 'Failed Download stream'
-            })
-          );
+      (actions: CarShowActions, carShowService: CarShowService) => {
+        // Given
+        spyOn(carShowService, 'fetchCarShows').and.returnValue(throwError(
+          {
+            status: 400,
+            error: 'Failed Download stream'
+          })
+        );
 
-          // When
-          actions.fetchCarShows();
+        // When
+        actions.fetchCarShows();
 
-          // Then
-          expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_START });
-          expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_ERROR, payload: 'Failed Download stream' });
-          expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_END });
-        }
-      )
+        // Then
+        expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_START });
+        expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_ERROR, payload: 'Failed Download stream' });
+        expect(reduxDispatchSpy).toHaveBeenCalledWith({ type: CarShowActions.GET_CAR_SHOW_END });
+      })
     );
   });
 });
