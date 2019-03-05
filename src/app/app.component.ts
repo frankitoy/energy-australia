@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       pipe(
         filter(event => event instanceof NavigationEnd)
       )
-      .subscribe(_ => {
+      .subscribe(() => {
         const routeParts = this.routePartsService.generateRouteParts(this.activeRoute.snapshot);
         if (!routeParts.length) {
           return this.title.setTitle(this.appTitle);

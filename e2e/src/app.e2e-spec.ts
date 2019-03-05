@@ -14,8 +14,7 @@ describe(`${environment.appName} e2e tests`, () => {
     expect(page.getTitleText()).toEqual(`Welcome to ${environment.appName}!`);
   });
 
-  it('should display the list of car shows', () => {
+  xit('should display the list of car shows', () => {
     page.navigateTo();
-    // console.log(page.getCarShows());
   });
 });
