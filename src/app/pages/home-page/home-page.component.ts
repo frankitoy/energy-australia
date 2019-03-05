@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { filter, map, takeUntil, tap, flatMap, concatMap, groupBy, mergeMap, toArray } from 'rxjs/operators';
-
-import { flattenDepth as _flattenDepth} from 'lodash';
+import { filter, groupBy, takeUntil, tap } from 'rxjs/operators';
 
 import { select } from '@angular-redux/store';
 

@@ -2,7 +2,7 @@ import { AppPage } from './app.po';
 
 import { environment } from '../../src/environments/environment';
 
-describe('workspace-project App', () => {
+describe(`${environment.appName} e2e tests`, () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -12,5 +12,10 @@ describe('workspace-project App', () => {
   it('should display welcome message', () => {
     page.navigateTo();
     expect(page.getTitleText()).toEqual(`Welcome to ${environment.appName}!`);
+  });
+
+  it('should display the list of car shows', () => {
+    page.navigateTo();
+    // console.log(page.getCarShows());
   });
 });
