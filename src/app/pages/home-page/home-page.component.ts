@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, takeUntil, tap, flatMap, concatMap, groupBy, mergeMap, toArray } from 'rxjs/operators';
+
+import { flattenDepth as _flattenDepth} from 'lodash';
 
 import { select } from '@angular-redux/store';
 
@@ -11,6 +13,8 @@ import { Messages } from '../../shared/constants/messages.constant';
 import { CarShow } from '../../shared/models/car-show';
 
 import { CarShowActions } from '../../actions/car-show.actions';
+
+import { Car } from '../../shared/models/car';
 
 @Component({
   selector: 'ea-home-page',
@@ -22,6 +26,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   @select() readonly carShows$: Observable<CarShow>;
   @select() readonly loadingCarShow$: Observable<boolean>;
   @select() readonly notification$: Observable<string>;
+
+  public carShowsToDisplay: Array<any>;
 
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -47,10 +53,39 @@ export class HomePageComponent implements OnInit, OnDestroy {
             this._openSnackBar(Messages.warning.emptyResult);
           }
         }),
-        filter(carShows => !!carShows)
+        filter(carShows => !!carShows),
+        tap((carShows: any) => {
+          return carShows
+            .map((carShow: CarShow, mapIndex) => Object.assign(carShow, carShow.cars.reduce((previous: Car, current: Car) => {
+                previous[current && current.make ? `${current.make}-${mapIndex}` : ''] = {
+                  model: current.model,
+                  show: carShow && carShow.name ? carShow.name : ''
+                };
+                return previous;
+              }, {}))
+            ).forEach(shows => {
+                Object.keys(shows)
+                  .filter(key => key === 'cars' || key === 'name')
+                  .forEach( key => delete shows[key]);
+            });
+        })
       )
       .subscribe((carShows) => {
-        console.log(carShows);
+        const cars: Array<any> = [];
+        carShows.forEach((shows) => {
+          Object.keys(shows).forEach((key, keyIndex) => {
+            const [make, index] = key.split('-');
+            if (cars[make]) {
+              cars[make][keyIndex] = shows[key];
+            } else {
+              cars[make] = {
+                0: shows[key]
+              };
+            }
+          });
+        });
+
+        this.carShowsToDisplay = cars;
       });
   }
 
