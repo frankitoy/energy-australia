@@ -115,6 +115,9 @@ export function carShowFixtures(): Array<CarShow> {
         {
           make: 'Moto Tourismo',
           model: 'Delta 4'
+        },
+        {
+          model: 'Delta 4'
         }
       ]
     }
