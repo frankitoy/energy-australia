@@ -16,6 +16,7 @@ describe(`${environment.appName} e2e tests`, () => {
 
   it('should display the list of car shows', () => {
     page.navigateTo();
-    // console.log(page.getCarShows());
+    debugger;
+
   });
 });

@@ -10,10 +10,10 @@
     <mat-card-content *ngIf="carShowsToDisplay">
       <mat-card>
         <mat-list *ngFor="let carShows of carShowsToDisplay | keyvalue" class="car-show-container">
-          <mat-card-title class="car-make">{{ carShows.key }}</mat-card-title>
-          <mat-list-item *ngFor="let car of carShows.value | keyvalue">
-            <h4 mat-line class="car-model">{{ car.value.model }}</h4>
-            <p mat-line clas="car-show"> {{ car.value.show }}</p>
+          <mat-card-title [attr.id]="carShows.key">{{ carShows.key }}</mat-card-title>
+          <mat-list-item *ngFor="let car of carShows.value | sort: 'model' | keyvalue">
+            <h4 mat-line [attr.id]="carShows.key + carShows.value.key">{{ car.value.model }}</h4>
+            <p mat-line> {{ car.value.show }}</p>
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>

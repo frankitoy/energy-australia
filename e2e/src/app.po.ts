@@ -11,6 +11,6 @@ export class AppPage {
   }
 
   getCarShows() {
-    return element(by.css('car-make')).getWebElement();
+    return element.all(by.css('mat-card-title')).first();
   }
 }

@@ -86,7 +86,7 @@ describe('HomePageComponent', () => {
         component.ngOnInit();
 
         // Then
-        // expect(component.services).toEqual(session.presentationMetadataList[0].services);
+        expect(component.carShowsToDisplay).toBeTruthy();
       });
 
       it('should call the snackbar warning message when api response is empty',

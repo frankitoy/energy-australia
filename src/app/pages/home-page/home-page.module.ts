@@ -6,18 +6,10 @@ import { RouterModule } from '@angular/router';
 import {
   MatCardModule,
   MatCommonModule,
-  MatDialogModule,
   MatDividerModule,
-  MatExpansionModule,
   MatLineModule,
   MatListModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule
+  MatSnackBarModule
 } from '@angular/material';
 
 import { environment } from '../../../environments/environment';
@@ -26,6 +18,7 @@ import { CarShowActions } from '../../actions/car-show.actions';
 
 import { apiConstants } from '../../shared/constants/api.constant';
 import { CarShowService } from '../../shared/services/car-show.service';
+import { SortPipe } from '../../shared/pipes/sort.pipe';
 
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
@@ -38,18 +31,10 @@ import { HomePageComponent } from './home-page.component';
     RouterModule,
     MatCardModule,
     MatCommonModule,
-    MatDialogModule,
     MatDividerModule,
-    MatExpansionModule,
     MatLineModule,
     MatListModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule
+    MatSnackBarModule
   ],
   providers: [
     {
@@ -57,12 +42,15 @@ import { HomePageComponent } from './home-page.component';
       useValue: environment.api
     },
     CarShowActions,
-    CarShowService
+    CarShowService,
+    SortPipe
   ],
   declarations: [
+    SortPipe,
     HomePageComponent
   ],
   exports: [
+    SortPipe,
     HomePageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
