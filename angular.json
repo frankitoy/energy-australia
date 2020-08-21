@@ -147,5 +147,8 @@
     "@schematics/angular:directive": {
       "prefix": "ea"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
