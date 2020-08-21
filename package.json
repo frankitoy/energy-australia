@@ -13,7 +13,7 @@
     "precommit": "npm-run-all lint:fix",
     "prepush": "npm-run-all lint test",
     "pre-release": "npm-run-all lint test build",
-    "serve": "ng serve --proxy-config proxy.config.json --source-map=true --base-href=/ --port 4100",
+    "serve": "ng serve --proxy-config proxy.config.json",
     "test": "ng test --watch=false --code-coverage"
   },
   "private": true,
